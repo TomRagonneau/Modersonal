@@ -10,6 +10,8 @@ __pycache__/
 modersonal/local_settings.py
 db.sqlite3
 db.sqlite3-journal
+**/migrations/*.py
+!**/migrations/__init__.py
 media
 
 # Django collectstatic
@@ -229,4 +231,3 @@ fabric.properties
 # CodeStream plugin
 # Reference:https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml
-
