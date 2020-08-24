@@ -16,6 +16,9 @@ Including another URLconf
 from django.urls import path
 
 from . import views
+from .apps import UsersConfig
+
+app_name = UsersConfig.name
 
 urlpatterns = [
     path('register/', views.TblRegisterView.as_view(redirect_authenticated_user=True), name='register'),

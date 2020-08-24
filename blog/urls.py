@@ -15,4 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-urlpatterns = []
+from . import views
+from .apps import BlogConfig
+
+app_name = BlogConfig.name
+urlpatterns = [
+    path('', views.PostListView.as_view(), name='home'),
+    path('create/', views.CreatePostView.as_view(), name='create'),
+    path('<slug:slug>/', views.PostDetailView.as_view(), name='details'),
+]

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modersonal</title>
+</head>
+<body>
+
+{% for post in posts %}
+    <h2>{{ post.title }}</h2>
+    <h3>{{ post.author }} | {{ post.created_on }}</h3>
+    <p>{{post.content | slice:":200" }}</p>
+    <a href="{% url 'blog:details' post.slug %}">Read More</a>.
+    <hr>
+{% endfor %}
+{% if user.is_authenticated %}
+    Create a <a href="{% url 'blog:create' %}">new post</a>.
+{% endif %}
+Go back <a href="{% url 'home' %}">Home</a>.
+
+</body>
+</html>

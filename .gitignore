@@ -1,6 +1,7 @@
 ### Modersonal v1.0.0 ###
 # Copyright 2020 Tom M. Ragonneau
-# Licensed under GNU General Public License v3.0 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+# Licensed under GNU General Public License v3.0
+# https://www.gnu.org/licenses/gpl-3.0.en.html
 
 ### Django ###
 *.log
@@ -137,8 +138,9 @@ dmypy.json
 .pytype/
 
 ### PyCharm ###
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion,
+#   Android Studio, WebStorm and Rider
+# https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 .idea/
 
 # User-specific stuff
@@ -208,26 +210,26 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 ### PyCharm Patch ###
-# Reference: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+# https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # Sonarlint plugin
-# Reference: https://plugins.jetbrains.com/plugin/7973-sonarlint
+# https://plugins.jetbrains.com/plugin/7973-sonarlint
 .idea/**/sonarlint/
 
 # SonarQube Plugin
-# Reference: https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
+# https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
 .idea/**/sonarIssues.xml
 
 # Markdown Navigator plugin
-# Reference: https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced
+# https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced
 .idea/**/markdown-navigator.xml
 .idea/**/markdown-navigator-enh.xml
 .idea/**/markdown-navigator/
 
 # Cache file creation bug
-# Reference: https://youtrack.jetbrains.com/issue/JBR-2257
+# https://youtrack.jetbrains.com/issue/JBR-2257
 .idea/$CACHE_FILE$
 
 # CodeStream plugin
-# Reference:https://plugins.jetbrains.com/plugin/12206-codestream
+# https://plugins.jetbrains.com/plugin/12206-codestream
 .idea/codestream.xml

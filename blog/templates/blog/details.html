@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modersonal</title>
+</head>
+<body>
+
+<h1>{{ post.title }}</h1>
+
+<p>{{ post.author }} | {{ post.created_on }}</p>
+<p>{{ post.content | safe }}</p>
+{% for comment in comments %}
+    <hr>
+    <p>{% if comment.status == 0 %}Drafted comment{% else %}Comment{% endif %} by {{ comment.author }} | {{ comment.created_on }}</p>
+    <p>{{ comment.content | safe }}</p>
+{% endfor %}
+{% if user.is_authenticated %}
+    <hr>
+    <h3>Add a new comment</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="action" value="creation">Submit</button>
+    </form>
+{% endif %}
+<hr>
+<a href="{% url 'blog:home' %}">Go back</a>.
+
+</body>
+</html>

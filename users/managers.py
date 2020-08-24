@@ -5,7 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 class TblUserManager(BaseUserManager):
     """Management of TBL Users."""
 
-    # Serialize the manager into migrations to have them available in RunPython operations.
+    # Serialize the manager into migrations to have them available in RunPython
+    # operations.
     use_in_migrations = True
 
     def create_user(self, email, password, **kwargs):

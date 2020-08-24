@@ -33,7 +33,8 @@ class TblUser(AbstractBaseUser, PermissionsMixin):
     objects = TblUserManager()
 
     def save(self, *args, **kwargs):
-        # Before being dumped into the database, the users fields first_name and last_name are pretreated:
+        # Before being dumped into the database, the users fields first_name and
+        # last_name are pretreated:
         # 1. All the excessive blank characters are removed.
         # 2. All the spaces are stripped.
         # 3. The cases of each field are titled.
@@ -42,4 +43,7 @@ class TblUser(AbstractBaseUser, PermissionsMixin):
         super(TblUser, self).save(*args, **kwargs)
 
     def __str__(self):
-        return '{} {}'.format(next(title[1] for title in TITLES if title[0] == self.title), self.last_name)
+        return '{} {}'.format(
+            next(title[1] for title in TITLES if title[0] == self.title),
+            self.last_name
+        )

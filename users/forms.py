@@ -12,7 +12,7 @@ class TblUserCreationForm(UserCreationForm):
     """Creation form of TBL Users."""
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')  # print only the name of the labels in the views
+        kwargs.setdefault('label_suffix', '')
         super(TblUserCreationForm, self).__init__(*args, **kwargs)
 
     class Meta:
@@ -25,18 +25,19 @@ class TblAuthenticationForm(forms.Form):
 
     email = forms.EmailField(label=_('Email address'))
     password = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
-    remember = forms.BooleanField(label=_('Remember me'), required=False, widget=forms.CheckboxInput())
+    remember = forms.BooleanField(
+        label=_('Remember me'), required=False, widget=forms.CheckboxInput())
 
     error_messages = {
         'invalid_login': _('Please enter a correct %(email)s and password. '
-                           'Note that the password field may be case-sensitive.'),
+                           'Note that the both fields may be case-sensitive.'),
         'inactive': _('This account is inactive.'),
     }
 
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
         self.user_cache = None
-        kwargs.setdefault('label_suffix', '')  # print only the name of the labels in the views
+        kwargs.setdefault('label_suffix', '')
         super(TblAuthenticationForm, self).__init__(*args, **kwargs)
 
         # Set the label for the 'email' field.
@@ -55,9 +56,10 @@ class TblAuthenticationForm(forms.Form):
         if email and password:
             self.user_cache = authenticate(email=email, password=password)
             if self.user_cache is None:
-                # During the authentication phase, it is primordial to ensure the existence of the user in the database
-                # before raising any error if the authentication failed, to differentiate the inactive and invalid_login
-                # errors.
+                # During the authentication phase, it is primordial to ensure
+                # the existence of the user in the database before raising any
+                # error if the authentication failed, to differentiate the
+                # inactive and invalid_login errors.
                 try:
                     user_profile = TblUser.objects.get(email=email)
                 except ObjectDoesNotExist:
@@ -99,7 +101,7 @@ class TblUserChangeForm(UserChangeForm):
     """Updating form of TBL Users."""
 
     def __init__(self, *args, **kwargs):
-        kwargs.setdefault('label_suffix', '')  # print only the name of the labels in the views
+        kwargs.setdefault('label_suffix', '')
         super(TblUserChangeForm, self).__init__(*args, **kwargs)
 
     class Meta:
