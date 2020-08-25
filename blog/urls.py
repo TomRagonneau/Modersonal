@@ -22,5 +22,6 @@ app_name = BlogConfig.name
 urlpatterns = [
     path('', views.PostListView.as_view(), name='home'),
     path('create/', views.CreatePostView.as_view(), name='create'),
+    path('like/<int:post_id>', views.UpdatePostLike.as_view(), name='like'),
     path('<slug:slug>/', views.PostDetailView.as_view(), name='details'),
 ]

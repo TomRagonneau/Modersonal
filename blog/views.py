@@ -2,13 +2,15 @@ from pathlib import Path
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views import generic
+from django.views import generic, View
 from django.views.generic.edit import FormMixin
 
 from .forms import BlogCreationForm, CommentCreationForm
-from .models import Post, Comment
+from .models import Post, Comment, Like
 
 BLOG_DIR = Path(__package__)
 
@@ -86,3 +88,30 @@ class CreatePostView(generic.CreateView):
         # The author of the post is the authenticated user.
         form.instance.author = self.request.user
         return super(CreatePostView, self).form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class UpdatePostLike(View):
+    """Update post like database."""
+
+    redirect_to = reverse_lazy('blog:home')
+
+    def get(self, request, *args, **kwargs):
+        post_id = self.kwargs.get('post_id', None)
+        post = get_object_or_404(Post, id=post_id)
+        referer = request.META.get('HTTP_REFERER', self.redirect_to)
+
+        # Create the Like model relating to the post.
+        try:
+            post.likes
+        except Like.DoesNotExist:
+            Like.objects.create(post=post)
+
+        # Dump/delete the like request into the database.
+        if request.user in post.likes.users.all():
+            post.likes.users.remove(request.user)
+        else:
+            post.likes.users.add(request.user)
+
+        return HttpResponseRedirect(referer)
+

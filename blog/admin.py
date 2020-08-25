@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .forms import BlogCreationForm, BlogChangeForm, CommentCreationForm, CommentChangeForm
-from .models import Post, Comment
+from .models import Post, Comment, Like
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -50,5 +50,26 @@ class CommentAdmin(admin.ModelAdmin):
         super(CommentAdmin, self).save_model(request, obj, form, change)
 
 
+class LikeAdmin(admin.ModelAdmin):
+    """Administration for blog likes."""
+
+    list_display = ('post', 'created_on',)
+    list_filter = ()
+    add_fieldsets = (
+        (None, {'classes': ('wide',), 'fields': ('post', 'authors')}),
+    )
+    search_fields = ('post',)
+    ordering = ('created_on',)
+    filter_horizontal = ()
+    readonly_fields = ('created_on', 'updated_on')
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            # The author should be added only at the first saving.
+            obj.author = request.user
+        super(LikeAdmin, self).save_model(request, obj, form, change)
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Like, LikeAdmin)

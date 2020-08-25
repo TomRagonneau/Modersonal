@@ -9,7 +9,11 @@
 {% for post in posts %}
     <h2>{{ post.title }}</h2>
     <h3>{{ post.author }} | {{ post.created_on }}</h3>
-    <p>{{post.content | slice:":200" }}</p>
+    <p>{{ post.content | slice:":200" }}</p>
+    Likes: {{ post.count_likes }}.
+    {% if user.is_authenticated %}
+        <a href="{% url 'blog:like' post_id=post.pk %}">{% if user in post.likes.users.all %}Unlike{% else %}Like{% endif %}</a>.
+    {% endif %}
     <a href="{% url 'blog:details' post.slug %}">Read More</a>.
     <hr>
 {% endfor %}
